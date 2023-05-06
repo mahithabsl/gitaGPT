@@ -1,20 +1,21 @@
 import openai
 import streamlit as st
-from dotenv import load_dotenv
+import os
 import requests
 from bs4 import BeautifulSoup
 
-load_dotenv('api_key.env')
-openai.api_key = ''
+# openai.api_key = os.getenv("OPENAI_API_KEY")
+st.header("Jai Shree Krishna, Understand Gita today !")
+openai.api_key = st.text_input("Enter your Openai API key", type="password")
+
 base_audio_url = "https://www.holy-bhagavad-gita.org/public/audio/"
 verse_url = 'https://www.holy-bhagavad-gita.org/chapter/'
-st.header("Jai Shree Krishna, Understand Gita today !")
-
 
 def generate_response(prompt):
+
     try:
         completion = openai.Completion.create(
-            engine='gpt-3.5-turbo',
+            engine='text-davinci-003',
             prompt=prompt,
             max_tokens=1024,
             n=1,
@@ -28,7 +29,8 @@ def generate_response(prompt):
 
 
 def main():
-    random_question = st.text_input('Ask any question')
+
+    random_question = st.text_input('Ask any question below/ Use the side navbar for meanings and summaries')
 
     languages = ['English', 'Marathi', 'Telugu', 'Tamil', 'Malayalam', 'Odisha', 'Kannada', 'Punjabi']
     language = st.sidebar.selectbox('Select Language', languages)
@@ -47,6 +49,7 @@ def main():
     if random_question:
         placeholder = st.empty()
         placeholder.write("")
+        print(random_question)
         response2 = generate_response(random_question)
         placeholder.write(response2)
 
@@ -69,6 +72,7 @@ def get_verse(verse_url,chapter,verse):
 
 def get_result(aim, chapter, language):
     if aim == 'Meaning' and language:
+
         verse = st.sidebar.number_input('Verse', 1, 100)
         audio_url = get_audio_url(base_audio_url,chapter,verse)
         verse = get_verse(verse_url,chapter,verse)
