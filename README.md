@@ -1,2 +1,2 @@
 # gitaGPT
-Learn, Pronounce and Understand Bhagavadgita here - https://mahithabsl-gitagpt-main-95uu18.streamlit.app/
+Learn, Pronounce and Understand Bhagavadgita here - https://mahithabsl-gitagpt-main-avtv1g.streamlit.app/
