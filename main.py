@@ -64,7 +64,7 @@ def get_verse(verse_url,chapter,verse):
 
     response = requests.get(updated_verse_url)
     if response.ok:
-        soup = BeautifulSoup(requests.get(updated_verse_url).text, "lxml")
+        soup = BeautifulSoup(requests.get(updated_verse_url).text)
 
         originalVerse_div = soup.find("div", {"id": "originalVerse"})
         originalVerse = originalVerse_div.get_text()
